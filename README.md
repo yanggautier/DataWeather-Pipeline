@@ -16,7 +16,7 @@ Ce projet permet de transformer des données brutes de stations métérologique 
 │   │   └── Weather+Underground+-+La+Madeleine,+FR.xlsx
 │   └── output
 │       └── final.json
-├── dico_données.xlsx
+├── dico_données.xlsx
 ├── docker-compose.airbyte.yaml
 ├── docker-compose.yml
 ├── flags.yml
