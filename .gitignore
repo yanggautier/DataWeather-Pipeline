@@ -1,0 +1,9 @@
+.ipynb_checkpoints
+venv
+dicto_données.xlsx
+temporal
+temporal/*
+.env
+.env.awsecs
+*.ipynb
+*.DS_Store

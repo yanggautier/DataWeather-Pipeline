@@ -1,0 +1,82 @@
+version: "3"
+
+services:
+  mongodb1:
+    image: mongo:latest
+    container_name: mongodb1
+    ports:
+      - "${MONGO_EXPOSE_PORT_1}:27017"
+    volumes:
+      - mongodb_data1:/data/db
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    networks:
+      - mongo_network
+
+  mongodb2:
+    image: mongo:latest
+    container_name: mongodb2
+    ports:
+      - "${MONGO_EXPOSE_PORT_2}:27017"
+    volumes:
+      - mongodb_data2:/data/db
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    networks:
+      - mongo_network
+
+  mongodb3:
+    image: mongo:latest
+    container_name: mongodb3
+    ports:
+      - "${MONGO_EXPOSE_PORT_3}:27017"
+    volumes:
+      - mongodb_data3:/data/db
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    networks:
+      - mongo_network
+
+  arbiter:
+    image: mongo:latest
+    container_name: arbiter
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    networks:
+      - mongo_network
+
+  init-replica:
+    image: mongo:latest
+    container_name: mongo-init-replica
+    depends_on:
+      - mongodb1
+      - mongodb2
+      - mongodb3
+      - arbiter
+    networks:
+      - mongo_network
+    volumes:
+      - ./init-replica.js:/init-replica.js
+    entrypoint: ["mongosh", "--host", "mongodb1", "/init-replica.js"]
+
+  python_processor:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: python_processor
+    volumes:
+      - ./scripts:/app/scripts
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb://mongodb1:27017,mongodb2:27018,mongodb3:27019/?replicaSet=rs0
+      - DATA_PATH=${DATA_PATH}
+    networks:
+      - mongo_network
+    depends_on:
+      - init-replica
+
+
+volumes:
+  mongodb_data1:
+  mongodb_data2:
+  mongodb_data3:
+
+networks:
+  mongo_network:
