@@ -47,4 +47,4 @@ Ce projet permet de transformer des données brutes de stations métérologique 
 
 6. Transaction des données dans le cloud AWS
     1. Via Airbyte
-    2. Par Jupyter notebook `Connect_ECS.ipynb`
+    2. Par `python insert_to_ecs.py`
