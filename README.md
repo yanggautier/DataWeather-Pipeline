@@ -2,38 +2,6 @@
 
 Ce projet permet de transformer des données brutes de stations métérologique et intégrer ces données météo de stations dans une architecture semi-professionnelles dans le cloud AWS.
 
-### Architecture du projet
-
-├── Dockerfile
-├── Dockerfile.aribyte_src_python
-├── README.md
-├── Reporting_MongoDB.ipynb
-├── Connect_ECS.ipynb
-├── data
-│   ├── input
-│   │   ├── Data_Source1_011024-071024.json
-│   │   ├── Weather+Underground+-+Ichtegem,+BE.xlsx
-│   │   └── Weather+Underground+-+La+Madeleine,+FR.xlsx
-│   └── output
-│       └── final.json
-├── dico_données.xlsx
-├── docker-compose.airbyte.yaml
-├── docker-compose.yml
-├── flags.yml
-├── ingest_mongodb.py
-├── init-replica.js
-├── requirements.txt
-├── scripts
-│   ├── etl_to_mongodb.py
-│   ├── etl_to_path.py
-│   ├── reporting_time.py
-│   └── schema_validator.py
-├── tests
-│   ├── post_test_migration.py
-│   └── pre_test_migration.py
-└── to_json.py
-
-
 ## Installation 
 
 1. Mettre à jour les fichiers `.env` et `.env.awsecs` à partir des fichiers .sample
