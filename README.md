@@ -21,7 +21,7 @@ Ce projet permet de transformer des données brutes de stations métérologique 
 4. Démarrer la deuxième docker-compose 
 
     - Mongodb et Script Python pour injection donnéews dans MongoDB
-    `docker-compose -f docker-compose.yaml --env-file .env  up -d`
+    `docker-compose up -d`
 
     Ce docker-compose permet:
         1. créer un replica set de MongoDB, il contient 3 instances MongoDB et 1 instance arbitraire.
