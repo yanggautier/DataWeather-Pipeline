@@ -5,7 +5,7 @@ import pymongo
 import logging
 from dotenv import load_dotenv
 from pathlib import Path
-from .scripts.etl_to_mongodb import *
+from scripts.etl_to_mongodb import *
 
 
 def measure_query_performance(collection, query, iterations=10):
